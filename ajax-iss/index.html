@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="ajax.js"></script>
+  <script>
+    
+  (function myFunc(){
+    var settings={
+      "url":"http://api.open-notify.org/iss-now.json",
+      "method":"GET",
+      "async":true,
+      "cache":false
+    }
+      $.ajax(settings).done(function(response){
+        console.log(response);
+
+        var lng=response.iss_position.longitude;
+        var lat=response.iss_position.latitude;
+        $("#lng").html(lng);
+        $("#lat").html(lat);
+    }).done(function(){
+      setTimeout(myFunc,500);
+    });
+  })();
+  </script>
+  <title>Document</title>
+</head>
+<body>
+    <div style="text-align: center"><img src="iss.png" width="500" height="600"></div>
+    <div>Current longitude of International Space Station: </div>
+    <p id="lng"></p>
+    <div>Current latitude of International Space Station: </div>
+    <p id="lat"></p>  
+</body>
+</html>
